@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   with_options presence: true, format: { with: /\A[ぁ-ん一-龥]+\z/ } do
     validates :name_zen_family, presence: true
-    validates :name_zen_first, presence: true 
+    validates :name_zen_first, presence: true
   end
 
   with_options presence: true, format: { with: /\A[ァ-ン]+\z/ } do
@@ -18,7 +18,6 @@ class User < ApplicationRecord
 
   validates :birthday, presence: true
 
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
   validates_format_of :password, with: PASSWORD_REGEX
-
 end
