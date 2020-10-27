@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+  extend ActiveHash::Associations::ActiveRecordExtensions
 
   belongs_to :user
   belongs_to_active_hash :category
@@ -11,12 +12,18 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :description
-    validates :category_id
-    validates :status_id
-    validates :burden_id
-    validates :area_id
-    validates :day_id
+    validates :category
+    validates :status
+    validates :burden
+    validates :area
+    validates :day
     validates :price
     validates :image
   end
+
+  validates :category_id, numericality: { other_than: 1 }
+  validates :status_id, numericality: { other_than: 1 }
+  validates :burden_id, numericality: { other_than: 1 }
+  validates :area_id, numericality: { other_than: 1 }
+  validates :day_id, numericality: { other_than: 1 }
 end

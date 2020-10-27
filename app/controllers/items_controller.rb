@@ -1,5 +1,10 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_user! [:new]
+
   def index
+  end
+
+  def new
   end
 
   private
