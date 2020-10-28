@@ -14,8 +14,8 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nick_name
     validates :birthday
-    validates :name_han_family, format: { with: /\A[ァ-ン]+\z/ } 
-    validates :name_han_first, format: { with: /\A[ァ-ン]+\z/ } 
+    validates :name_han_family, format: { with: /\A[ァ-ン]+\z/ }
+    validates :name_han_first, format: { with: /\A[ァ-ン]+\z/ }
   end
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
