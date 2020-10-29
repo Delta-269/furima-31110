@@ -32,25 +32,50 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Category must be other than 1')
       end
+      it 'categoryが空では登録できない' do
+        @item.category_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
+      end
       it 'statusを選択しなければ登録できない' do
         @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Status must be other than 1')
+      end
+      it 'statusが空では登録できない' do
+        @item.status_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status can't be blank", "Status is not a number")
       end
       it 'burdenを選択しなければ登録できない' do
         @item.burden_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Burden must be other than 1')
       end
+      it 'burdenが空では登録できない' do
+        @item.burden_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Burden can't be blank", "Burden is not a number")
+      end
       it 'areaを選択しなければ登録できない' do
         @item.area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Area must be other than 1')
       end
+      it 'areaが空では登録できない' do
+        @item.area_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Area can't be blank", "Area is not a number")
+      end
       it 'dayを選択しなければ登録できない' do
         @item.day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include('Day must be other than 1')
+      end
+      it 'dayが空では登録できない' do
+        @item.day_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Day can't be blank", "Day is not a number")
       end
       it 'priceが存在しなければ登録できない' do
         @item.price = nil
