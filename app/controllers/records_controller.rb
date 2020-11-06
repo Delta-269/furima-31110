@@ -1,17 +1,15 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index]
+  before_action :item_params
 
   def index
-    @item = Item.find(params[:item_id])
     @form = FormObject.new
-    @user = @item.user
     @record = Record.find_by(item_id: @item.id)
-    redirect_to root_path if @user == current_user || !@record.nil?
+    redirect_to root_path if @item.user == current_user || !@record.nil?
   end
 
   def create
     @form = FormObject.new(form_params)
-    @item = Item.find(params[:item_id])
     if @form.valid?
       pay_item
       @form.save
@@ -34,5 +32,9 @@ class RecordsController < ApplicationController
       card: form_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def item_params
+    @item = Item.find(params[:item_id])
   end
 end
