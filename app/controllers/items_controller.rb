@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @record = Record.find_by(item_id: @item.id)
   end
 
   def edit
