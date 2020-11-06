@@ -8,7 +8,6 @@ class FormObject
     validates :area_id, numericality: { other_than: 1 }
     validates :city
     validates :address
-    validates :building
     validates :phone, format: {with: /\A\d{11}\z/}
     validates :token
   end
