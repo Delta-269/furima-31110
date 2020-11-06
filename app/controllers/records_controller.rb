@@ -5,11 +5,9 @@ class RecordsController < ApplicationController
     @item = Item.find(params[:item_id])
     @form = FormObject.new
     @user = @item.user
-    if @user == current_user 
+    @record = Record.find_by(item_id: @item.id)
+    if @user == current_user || @record != nil
       redirect_to root_path 
-    end
-    if @form.item_id == nil
-      redirect_to root_path
     end
   end
 
