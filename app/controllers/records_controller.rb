@@ -6,9 +6,7 @@ class RecordsController < ApplicationController
     @form = FormObject.new
     @user = @item.user
     @record = Record.find_by(item_id: @item.id)
-    if @user == current_user || @record != nil
-      redirect_to root_path 
-    end
+    redirect_to root_path if @user == current_user || !@record.nil?
   end
 
   def create
@@ -23,18 +21,18 @@ class RecordsController < ApplicationController
     end
   end
 
-
   private
+
   def form_params
     params.require(:form_object).permit(:post, :area_id, :city, :address, :building, :phone).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
-      Payjp::Charge.create(
-        amount: @item.price,  # 商品の値段
-        card: form_params[:token],    # カードトークン
-        currency: 'jpy'                 # 通貨の種類（日本円）
-      )
-    end
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp::Charge.create(
+      amount: @item.price, # 商品の値段
+      card: form_params[:token], # カードトークン
+      currency: 'jpy'                 # 通貨の種類（日本円）
+    )
+  end
 end

@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('created_at DESC')
-    #@record = Record.find_by(item_id: @items.id)
+    # @record = Record.find_by(item_id: @items.id)
   end
 
   def new
@@ -26,9 +26,7 @@ class ItemsController < ApplicationController
 
   def edit
     @user = @item.user
-    if @user != current_user
-      redirect_to action: :index
-    end
+    redirect_to action: :index if @user != current_user
   end
 
   def update
